@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kevin-myapp
+spec:
+  selector:
+    matchLabels:
+      app: kevin-myapp
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: kevin-myapp
+    spec:
+      containers:
+      - name: kevin-myapp
+        image: gcr.io/dd-decaf-cfbf6/kevin-myapp:latest
+        ports:
+        - containerPort: 8000
+      imagePullSecrets:
+      - name: kevin-regcred
